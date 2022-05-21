@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+table {
+  text-align: center;
+  border-collapse: separate;
+  border-radius: 8px;
+  border-spacing: 0px;
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+thead {
+  border-radius: 8px;
+  background-color: rgb(15 23 42);
+  color: #fff;
+  border-collapse: separate;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgb(241 245 249);
+}
+
+th,
+td {
+  padding: 10px 40px;
+
+  text-align: center;
+  vertical-align: top;
+}

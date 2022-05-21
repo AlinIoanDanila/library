@@ -1,9 +1,4 @@
-type InputProps = {
-  value: string | number;
-  label: string;
-  inputType?: string;
-  handleValue: any;
-};
+import { InputProps } from "../utility/types";
 
 const Input = ({ value, handleValue, label, inputType = "text" }: InputProps) => {
   return (

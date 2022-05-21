@@ -1,6 +1,6 @@
-import { BookProp } from "../utility/types";
+import { BookProps } from "../utility/types";
 
-const Book = (props: BookProp) => {
+const Book = (props: BookProps) => {
   return (
     <section className="flex gap-x-2 justify-between w-full h-10 bg-orange-500 text-white">
       <p>{props.title}</p>

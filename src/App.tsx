@@ -1,81 +1,26 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
+import AddBook from "./components/AddBook";
+import ViewBooks from "./components/ViewBooks";
 
-import Input from "./components/Input";
-import Book from "./components/Book";
-import { checkBook, getFormObject } from "./utility/books";
+import { BookProps } from "./utility/types";
 
-import { BookProp } from "./utility/types";
+const initialState = [
+  {
+    title: "Title",
+    author: "Title",
+    ISBN: 0,
+    price: 0,
+    numberOfBooks: 1,
+  },
+];
 
 const App = () => {
-  const [data, setData] = useState({
-    title: "",
-    isbn: "",
-    author: "",
-    price: "",
-  });
-  const [availableBooks, setAvailableBooks] = useState<BookProp[]>([]);
-
-  const handleChange = (name: any, value: any) => {
-    setData((data) => ({
-      ...data,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const newBook = getFormObject(event);
-
-    const availableBook = checkBook(availableBooks, newBook);
-
-    if (availableBook) {
-      const duplicatedIndex = availableBooks.findIndex(
-        (book) => book.author === availableBook.author && book.ISBN === availableBook.ISBN
-      );
-      let newArr = [...availableBooks];
-      newArr[duplicatedIndex] = { ...availableBook, numberOfBooks: availableBook.numberOfBooks + 1 };
-
-      setAvailableBooks(newArr);
-    } else setAvailableBooks((books) => [...books, { ...newBook, numberOfBooks: 1 }]);
-  };
-
-  console.log(availableBooks);
+  const [availableBooks, setAvailableBooks] = useState<BookProps[]>(initialState);
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center bg-red-50">
-      <form
-        onSubmit={(e) => handleSubmit(e)}
-        className="flex flex-col p-4 gap-3 w-fit h-fit bg-white rounded-md shadow-md"
-      >
-        <h3>Add book</h3>
-        <Input value={data.title} handleValue={handleChange} label="Title" />
-        <Input value={data.author} handleValue={handleChange} label="Author" />
-        <Input value={data.isbn} handleValue={handleChange} label="ISBN" inputType="number" />
-        <Input value={data.price} handleValue={handleChange} label="Price" inputType="number" />
-        <button
-          className="w-30 mb-2 self-center w-1/2 h-8 border-2 border-slate-600 text-slate-600 font-semibold hover:bg-slate-600 hover:text-white text-lg rounded-sm"
-          type="submit"
-        >
-          Submit
-        </button>
-      </form>
-
-      <div>
-        <>
-          <h3>Books</h3>
-          {availableBooks
-            ? availableBooks.map((book) => (
-                <Book
-                  title={book.title}
-                  author={book.author}
-                  ISBN={book.ISBN}
-                  price={book.price}
-                  numberOfBooks={book.numberOfBooks}
-                />
-              ))
-            : null}
-        </>
-      </div>
+    <div className="w-screen h-screen flex items-center  bg-red-50">
+      <AddBook availableBooks={availableBooks} setAvailableBooks={setAvailableBooks} />
+      <ViewBooks availableBooks={availableBooks} />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import { BookProp } from "./types";
+import { BookProps } from "./types";
 
 export const getFormObject = (event: FormEvent<HTMLFormElement>) => {
   const { title, isbn, author, price } = event.target as typeof event.target & {
@@ -18,7 +18,7 @@ export const getFormObject = (event: FormEvent<HTMLFormElement>) => {
   };
 };
 
-export const checkBook = (array: BookProp[], newBook: BookProp) => {
+export const checkBook = (array: BookProps[], newBook: BookProps) => {
   const checkBookInArray = array.find(
     (book) => book.author === newBook.author && book.ISBN === newBook.ISBN && book.title === newBook.title
   );
