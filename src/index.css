@@ -24,8 +24,7 @@ tbody tr:nth-child(even) {
 
 th,
 td {
-  padding: 10px 40px;
-
+  padding: 10px 30px;
   text-align: center;
   vertical-align: top;
 }

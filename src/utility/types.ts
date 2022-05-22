@@ -5,15 +5,19 @@ export type BookProps = {
   author: string;
   ISBN: number;
   price: number;
-  burrowed?: boolean;
   numberOfBooks: number;
+  borrowed?: boolean | null;
+  returnDate?: number | null;
 };
 
-export type AvailableBooksProps = {
+export type BorrowReturnProps = {
   availableBooks: BookProps[];
+  setAvailableBooks: Dispatch<SetStateAction<BookProps[]>>;
+  borrowedBooks: BookProps[];
+  setBorrowedBooks: Dispatch<SetStateAction<BookProps[]>>;
 };
 
-export type AddBookProps = {
+export type BookListProps = {
   availableBooks: BookProps[];
   setAvailableBooks: Dispatch<SetStateAction<BookProps[]>>;
 };
