@@ -1,6 +1,6 @@
 import { BorrowReturnProps, BookProps } from "../utility/types";
 
-const ViewBooks = ({ availableBooks, borrowedBooks, setAvailableBooks, setBorrowedBooks }: BorrowReturnProps) => {
+const ViewBooks = ({ availableBooks, setAvailableBooks, setBorrowedBooks }: BorrowReturnProps) => {
   const handleBurrow = (currentBook: BookProps) => {
     const borrowedBook: BookProps = {
       ...currentBook,
@@ -28,7 +28,7 @@ const ViewBooks = ({ availableBooks, borrowedBooks, setAvailableBooks, setBorrow
         </tr>
       </thead>
       <tbody>
-        {availableBooks.map((book, index) => {
+        {availableBooks.map((book) => {
           return (
             <tr key={book.ISBN}>
               <td>{book.title}</td>

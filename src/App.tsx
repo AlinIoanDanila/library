@@ -1,8 +1,9 @@
 import { useState } from "react";
-import AddBook from "./components/AddBook";
-import ViewBooks from "./components/ViewBooks";
 
 import { BookProps } from "./utility/types";
+import AddBook from "./components/AddBook";
+import ViewBooks from "./components/ViewBooks";
+import ReturnBook from "./components/ReturnBook";
 
 const initialState = [
   {
@@ -38,6 +39,13 @@ const App = () => {
     <div className="w-screen h-screen flex items-center  bg-red-50">
       <AddBook availableBooks={availableBooks} setAvailableBooks={setAvailableBooks} />
       <ViewBooks
+        availableBooks={availableBooks}
+        setAvailableBooks={setAvailableBooks}
+        borrowedBooks={borrowedBooks}
+        setBorrowedBooks={setBorrowedBooks}
+      />
+
+      <ReturnBook
         availableBooks={availableBooks}
         setAvailableBooks={setAvailableBooks}
         borrowedBooks={borrowedBooks}
