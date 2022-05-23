@@ -3,18 +3,20 @@ import { calculateLateReturn } from "../utility/books";
 
 const ReturnBook = ({ availableBooks, borrowedBooks, setAvailableBooks, setBorrowedBooks }: BorrowReturnProps) => {
   const handleReturn = (currentBook: BookProps) => {
-    console.log(currentBook);
+    const itemIndex = availableBooks.findIndex((item) => item.ISBN === currentBook.ISBN);
+    console.log(itemIndex);
 
-    // const borrowedBook: BookProps = {
-    //   ...currentBook,
-    //   returnDate: Date.now() + 14 * 24 * 60 * 60 * 1000,
-    //   borrowed: true,
-    // };
-    // setBorrowedBooks((oldArray) => [...oldArray, borrowedBook]);
-    // const elem = availableBooks.findIndex((elem) => elem.ISBN === currentBook.ISBN);
-    // const updatedArray = [...availableBooks];
-    // updatedArray[elem] = { ...currentBook, numberOfBooks: currentBook.numberOfBooks - 1 };
-    // setAvailableBooks(updatedArray);
+    const updatedAvailableBooks = [...availableBooks];
+    updatedAvailableBooks[itemIndex] = {
+      ...currentBook,
+      numberOfBooks: updatedAvailableBooks[itemIndex].numberOfBooks + 1,
+      returnDate: undefined,
+    };
+    setAvailableBooks(updatedAvailableBooks);
+
+    let updatedBorrowBooks = [...borrowedBooks];
+    updatedBorrowBooks = [...borrowedBooks].filter((book, index) => index !== itemIndex);
+    setBorrowedBooks(updatedBorrowBooks);
   };
 
   const getAmount = (item: BookProps) => {
@@ -34,16 +36,15 @@ const ReturnBook = ({ availableBooks, borrowedBooks, setAvailableBooks, setBorro
         </tr>
       </thead>
       <tbody>
-        {borrowedBooks.map((book) => {
+        {borrowedBooks.map((book, index) => {
           return (
-            <tr key={book.ISBN}>
+            <tr key={`${book.ISBN}-${index}`}>
               <td>{book.title}</td>
               <td>{book.author}</td>
               <td>{book.ISBN}</td>
               <td>{getAmount(book) === -1 ? "0" : getAmount(book)}</td>
               <button
-                disabled={getAmount(book) === -1 ? true : false}
-                onClick={() => getAmount(book)}
+                onClick={() => handleReturn(book)}
                 className="my-2 mx-4 rounded px-2 text-white border-2 border-green-500 bg-green-500 hover:text-slate-500 hover:bg-white"
               >
                 Return

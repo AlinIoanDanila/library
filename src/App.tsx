@@ -42,7 +42,7 @@ const TestData = [
 
 const App = () => {
   const [availableBooks, setAvailableBooks] = useState<BookProps[]>(initialState);
-  const [borrowedBooks, setBorrowedBooks] = useState<BookProps[]>(TestData);
+  const [borrowedBooks, setBorrowedBooks] = useState<BookProps[]>([]);
   const [view, setView] = useState<string>("add");
 
   return (
