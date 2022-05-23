@@ -38,6 +38,7 @@ const AddBook = (props: BookListProps) => {
     } else {
       setAvailableBooks((books) => [...books, { ...newBook, numberOfBooks: 1 }]);
     }
+    setForm(defaultFormState);
   };
 
   return (

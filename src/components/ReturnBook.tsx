@@ -3,17 +3,18 @@ import { calculateLateReturn } from "../utility/books";
 
 const ReturnBook = ({ availableBooks, borrowedBooks, setAvailableBooks, setBorrowedBooks }: BorrowReturnProps) => {
   const handleReturn = (currentBook: BookProps) => {
-    const borrowedBook: BookProps = {
-      ...currentBook,
-      returnDate: Date.now() + 14 * 24 * 60 * 60 * 1000,
-      borrowed: true,
-    };
-    setBorrowedBooks((oldArray) => [...oldArray, borrowedBook]);
+    console.log(currentBook);
 
-    const elem = availableBooks.findIndex((elem) => elem.ISBN === currentBook.ISBN);
-    const updatedArray = [...availableBooks];
-    updatedArray[elem] = { ...currentBook, numberOfBooks: currentBook.numberOfBooks - 1 };
-    setAvailableBooks(updatedArray);
+    // const borrowedBook: BookProps = {
+    //   ...currentBook,
+    //   returnDate: Date.now() + 14 * 24 * 60 * 60 * 1000,
+    //   borrowed: true,
+    // };
+    // setBorrowedBooks((oldArray) => [...oldArray, borrowedBook]);
+    // const elem = availableBooks.findIndex((elem) => elem.ISBN === currentBook.ISBN);
+    // const updatedArray = [...availableBooks];
+    // updatedArray[elem] = { ...currentBook, numberOfBooks: currentBook.numberOfBooks - 1 };
+    // setAvailableBooks(updatedArray);
   };
 
   const getAmount = (item: BookProps) => {
