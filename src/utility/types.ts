@@ -7,7 +7,7 @@ export type BookProps = {
   price: number;
   numberOfBooks: number;
   borrowed?: boolean | null;
-  returnDate?: number | null;
+  returnDate?: number;
 };
 
 export type BorrowReturnProps = {

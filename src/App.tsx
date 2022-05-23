@@ -29,11 +29,20 @@ const initialState = [
   },
 ];
 
+const TestData = [
+  {
+    title: "Title1",
+    author: "Author1",
+    ISBN: 123,
+    price: 100,
+    numberOfBooks: 1,
+    returnDate: 1651734715575,
+  },
+];
+
 const App = () => {
   const [availableBooks, setAvailableBooks] = useState<BookProps[]>(initialState);
-  const [borrowedBooks, setBorrowedBooks] = useState<BookProps[]>([]);
-
-  console.log(borrowedBooks);
+  const [borrowedBooks, setBorrowedBooks] = useState<BookProps[]>(TestData);
 
   return (
     <div className="w-screen h-screen flex items-center  bg-red-50">

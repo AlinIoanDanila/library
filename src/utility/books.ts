@@ -25,3 +25,13 @@ export const checkBook = (array: BookProps[], newBook: BookProps) => {
   if (checkBookInArray === undefined) return false;
   return checkBookInArray;
 };
+
+export const calculateLateReturn = (returnDate: number, bookPrice: number) => {
+  if (Date.now() < returnDate) {
+    return -1;
+  }
+  const days = Math.ceil((Date.now() - returnDate) / (24 * 60 * 60 * 1000)) - 14;
+
+  const price = (bookPrice / 100) * days;
+  return price;
+};
