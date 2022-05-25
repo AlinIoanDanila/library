@@ -2,18 +2,19 @@ import { BorrowReturnProps, BookProps } from "../utility/types";
 import { calculateLateReturn } from "../utility/books";
 
 const ReturnBook = ({ availableBooks, borrowedBooks, setAvailableBooks, setBorrowedBooks }: BorrowReturnProps) => {
-  const handleReturn = (currentBook: BookProps) => {
-    const itemIndex = availableBooks.findIndex((item) => item.ISBN === currentBook.ISBN);
-    console.log(itemIndex);
+  const handleReturn = (currentBook: BookProps, itemIndex: number) => {
+    const bookIndex = availableBooks.findIndex((item) => item.ISBN === currentBook.ISBN);
 
+    //return book in the available list (update available book)
     const updatedAvailableBooks = [...availableBooks];
-    updatedAvailableBooks[itemIndex] = {
+    updatedAvailableBooks[bookIndex] = {
       ...currentBook,
-      numberOfBooks: updatedAvailableBooks[itemIndex].numberOfBooks + 1,
+      numberOfBooks: updatedAvailableBooks[bookIndex].numberOfBooks + 1,
       returnDate: undefined,
     };
     setAvailableBooks(updatedAvailableBooks);
 
+    //remove the book from the borrowed list (update borrow list)
     let updatedBorrowBooks = [...borrowedBooks];
     updatedBorrowBooks = [...borrowedBooks].filter((book, index) => index !== itemIndex);
     setBorrowedBooks(updatedBorrowBooks);
@@ -44,7 +45,7 @@ const ReturnBook = ({ availableBooks, borrowedBooks, setAvailableBooks, setBorro
               <td>{book.ISBN}</td>
               <td>{getAmount(book) === -1 ? "0" : getAmount(book)}</td>
               <button
-                onClick={() => handleReturn(book)}
+                onClick={() => handleReturn(book, index)}
                 className="my-2 mx-4 rounded px-2 text-white border-2 border-green-500 bg-green-500 hover:text-slate-500 hover:bg-white"
               >
                 Return
